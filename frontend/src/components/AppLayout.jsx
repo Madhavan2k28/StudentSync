@@ -1,33 +1,16 @@
-import { NavLink, Outlet, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Logo from './Logo.jsx';
 import Avatar from './Avatar.jsx';
 import { useAuth } from '../auth.jsx';
 
-const NAV = [
-  { group: null, links: [{ to: '/dashboard', label: 'Dashboard' }] },
-  {
-    group: 'Lost & Found',
-    links: [
-      { to: '/items', label: 'Browse items', end: true },
-      { to: '/items/report', label: 'Report an item' },
-      { to: '/items/mine', label: 'My reports & claims' },
-    ],
-  },
-  {
-    group: 'Skill Exchange',
-    links: [
-      { to: '/skills', label: 'Browse skills', end: true },
-      { to: '/skills/mine', label: 'My skills' },
-      { to: '/requests', label: 'Requests & sessions' },
-    ],
-  },
-];
-
 export default function AppLayout() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
+  const { pathname } = useLocation();
+
+  const inLost = pathname.startsWith('/lost-found') || pathname.startsWith('/items');
+  const inSkills = pathname.startsWith('/skill') || pathname.startsWith('/requests') ||
+    (pathname.startsWith('/students') && !pathname.endsWith(`/${user.id}`));
 
   async function handleLogout() {
     await logout();
@@ -37,37 +20,22 @@ export default function AppLayout() {
   return (
     <div className="shell">
       <header className="topbar">
-        <Logo to="/dashboard" />
-        <button className="menu-btn" onClick={() => setOpen(!open)} aria-expanded={open}>
-          {open ? 'Close' : 'Menu'}
-        </button>
-      </header>
-
-      <aside className={`sidebar ${open ? 'is-open' : ''}`}>
-        <div className="sidebar-logo"><Logo to="/dashboard" /></div>
-        <nav onClick={() => setOpen(false)}>
-          {NAV.map((section) => (
-            <div key={section.group ?? 'main'} className="nav-group">
-              {section.group && <p className="nav-heading">{section.group}</p>}
-              {section.links.map((l) => (
-                <NavLink key={l.to} to={l.to} end={l.end} className="nav-link">
-                  {l.label}
-                </NavLink>
-              ))}
-            </div>
-          ))}
-        </nav>
-        <div className="sidebar-user">
-          <NavLink to={`/students/${user.id}`} className="me" onClick={() => setOpen(false)}>
-            <Avatar user={user} size={34} />
-            <span>
-              <strong>{user.name}</strong>
-              <small>{user.rollNo || user.email}</small>
-            </span>
-          </NavLink>
-          <button className="link-btn" onClick={handleLogout}>Log out</button>
+        <div className="topbar-inner">
+          <Logo to="/home" />
+          <nav className="topnav" aria-label="Main">
+            <NavLink to="/home" className="topnav-link">Home</NavLink>
+            <Link to="/lost-found" className={`topnav-link ${inLost ? 'active' : ''}`}>Lost &amp; Found</Link>
+            <Link to="/skill-exchange" className={`topnav-link ${inSkills ? 'active' : ''}`}>Skill Exchange</Link>
+          </nav>
+          <div className="topbar-user">
+            <Link to={`/students/${user.id}`} className="me" title="My profile">
+              <Avatar user={user} size={32} />
+              <span className="me-name">{user.name.split(' ')[0]}</span>
+            </Link>
+            <button className="link-btn" onClick={handleLogout}>Log out</button>
+          </div>
         </div>
-      </aside>
+      </header>
 
       <main className="content">
         <Outlet />

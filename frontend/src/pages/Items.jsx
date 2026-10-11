@@ -31,6 +31,7 @@ export default function Items() {
 
   return (
     <div className="page">
+      <p className="crumb"><Link to="/lost-found">Lost & Found</Link></p>
       <header className="page-head">
         <h1>Lost &amp; Found</h1>
         <div className="page-actions">

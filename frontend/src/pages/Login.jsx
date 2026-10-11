@@ -17,7 +17,7 @@ export default function Login() {
     setError('');
     try {
       await login(form.email, form.password);
-      navigate('/dashboard');
+      navigate('/home');
     } catch (err) {
       setError(err.message);
     } finally {

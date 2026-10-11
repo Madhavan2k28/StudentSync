@@ -26,6 +26,7 @@ export default function Requests() {
 
   return (
     <div className="page">
+      <p className="crumb"><Link to="/skill-exchange">Skill Exchange</Link></p>
       <header className="page-head"><h1>Requests &amp; sessions</h1></header>
       <div className="tabs" role="tablist">
         <button role="tab" aria-selected={tab === 'received'} className={tab === 'received' ? 'on' : ''} onClick={() => setTab('received')}>

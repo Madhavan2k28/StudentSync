@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { api } from '../api.js';
 import { ErrorNote, Loading } from '../components/Feedback.jsx';
@@ -20,6 +21,7 @@ export default function MySkills() {
 
   return (
     <div className="page">
+      <p className="crumb"><Link to="/skill-exchange">Skill Exchange</Link></p>
       <header className="page-head"><h1>My skills</h1></header>
       <ErrorNote error={error} />
       <div className="two-col">

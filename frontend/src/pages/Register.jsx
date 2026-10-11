@@ -19,7 +19,7 @@ export default function Register() {
     setError('');
     try {
       await register(form);
-      navigate('/dashboard');
+      navigate('/home');
     } catch (err) {
       setError(err.message);
     } finally {

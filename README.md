@@ -14,6 +14,10 @@ A campus web application where students report lost and found items and exchange
 
 Student: Tirumala Sai Madhavan, 24EG107C55, AIML-C
 
+### Interface
+
+White, red and black. After logging in, the home page offers two choices: **Lost & Found** (red) and **Skill Exchange** (black). Each opens a page listing that module's features.
+
 ---
 
 ## Project structure
@@ -38,10 +42,14 @@ StudentSync/
     └── src/
         ├── api.js               All REST calls
         ├── auth.jsx             Login state
-        ├── components/          Layout, item tag, avatar, messages
-        └── pages/               Landing, Login, Register, Dashboard, Items,
-                                 ReportItem, ItemDetail, MyItems, Skills,
-                                 MySkills, Requests, Profile
+        ├── components/          Top bar layout, item tag, icons, avatar, messages
+        └── pages/
+            ├── Landing, Login, Register
+            ├── Home               Two choices: Lost & Found, Skill Exchange
+            ├── LostFoundHub       Lost & Found features
+            ├── Items, ReportItem, ItemDetail, MyItems
+            ├── SkillHub           Skill Exchange features
+            └── Skills, MySkills, Requests, Profile
 ```
 
 ---

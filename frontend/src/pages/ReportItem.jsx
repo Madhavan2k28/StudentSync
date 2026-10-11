@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { api } from '../api.js';
 import { ErrorNote } from '../components/Feedback.jsx';
 import { CATEGORIES, LOCATIONS, today } from '../util.js';
@@ -31,6 +31,7 @@ export default function ReportItem() {
 
   return (
     <div className="page page-narrow">
+      <p className="crumb"><Link to="/lost-found">Lost & Found</Link></p>
       <header className="page-head"><h1>Report an item</h1></header>
 
       <form className="form panel" onSubmit={submit}>

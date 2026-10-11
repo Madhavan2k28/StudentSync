@@ -27,6 +27,7 @@ export default function MyItems() {
 
   return (
     <div className="page">
+      <p className="crumb"><Link to="/lost-found">Lost & Found</Link></p>
       <header className="page-head"><h1>My reports &amp; claims</h1></header>
 
       <section>

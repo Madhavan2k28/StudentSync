@@ -4,7 +4,9 @@ import AppLayout from './components/AppLayout.jsx';
 import Landing from './pages/Landing.jsx';
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
-import Dashboard from './pages/Dashboard.jsx';
+import Home from './pages/Home.jsx';
+import LostFoundHub from './pages/LostFoundHub.jsx';
+import SkillHub from './pages/SkillHub.jsx';
 import Items from './pages/Items.jsx';
 import ReportItem from './pages/ReportItem.jsx';
 import ItemDetail from './pages/ItemDetail.jsx';
@@ -21,7 +23,7 @@ function RequireAuth({ children }) {
 
 function GuestOnly({ children }) {
   const { user } = useAuth();
-  return user ? <Navigate to="/dashboard" replace /> : children;
+  return user ? <Navigate to="/home" replace /> : children;
 }
 
 export default function App() {
@@ -32,7 +34,9 @@ export default function App() {
       <Route path="/register" element={<GuestOnly><Register /></GuestOnly>} />
 
       <Route element={<RequireAuth><AppLayout /></RequireAuth>}>
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/lost-found" element={<LostFoundHub />} />
+        <Route path="/skill-exchange" element={<SkillHub />} />
         <Route path="/items" element={<Items />} />
         <Route path="/items/report" element={<ReportItem />} />
         <Route path="/items/mine" element={<MyItems />} />

@@ -28,6 +28,7 @@ export default function Skills() {
 
   return (
     <div className="page">
+      <p className="crumb"><Link to="/skill-exchange">Skill Exchange</Link></p>
       <header className="page-head">
         <h1>Skill Exchange</h1>
         <div className="page-actions"><Link className="btn btn-primary" to="/skills/mine">Add my skills</Link></div>

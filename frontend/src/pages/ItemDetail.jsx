@@ -48,7 +48,7 @@ export default function ItemDetail() {
 
   return (
     <div className="page">
-      <p className="crumb"><Link to="/items">Lost &amp; Found</Link></p>
+      <p className="crumb"><Link to="/lost-found">Lost &amp; Found</Link> / <Link to="/items">All items</Link></p>
       {state?.justReported && matches?.length > 0 && (
         <p className="note note-good">Posted. We found {matches.length} possible match{matches.length > 1 ? 'es' : ''}; have a look below.</p>
       )}
