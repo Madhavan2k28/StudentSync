@@ -1,5 +1,5 @@
 // All calls to the Spring Boot REST API go through here.
-const BASE = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+const BASE = import.meta.env.VITE_API_URL || 'http://localhost:8081';
 
 function token() {
   return localStorage.getItem('ss_token');
