@@ -17,8 +17,8 @@ import java.util.List;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    @Value("${app.cors.allowed-origin}")
-    private String allowedOrigin;
+    @Value("${app.cors.allowed-origins}")
+    private String allowedOrigins;
 
     private final AuthInterceptor authInterceptor;
     private final CurrentUserResolver currentUserResolver;
@@ -31,7 +31,8 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**")
-                .allowedOrigins(allowedOrigin.split(","))
+                // Patterns allow wildcards such as https://*.vercel.app
+                .allowedOriginPatterns(allowedOrigins.split("\\s*,\\s*"))
                 .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS");
     }
 
